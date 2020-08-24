@@ -1,12 +1,13 @@
 package ctf;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.IDN;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Url extends HttpServlet {
     @Override
@@ -16,13 +17,16 @@ public class Url extends HttpServlet {
             return;
         }
         URL url1 = new URL(IDN.toASCII(url));
+
         if (url1.getHost().equals("evil.ca")) {
-            resp.getWriter().write(Hello.getContent("/Temp/flag"));
+            String[] path = url.split("/");
+            String file = new String(Base64.getDecoder().decode(path[path.length - 1]));
+            resp.getWriter().write(new String(Files.readAllBytes(Paths.get(file))));
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         doGet(req, resp);
     }
 }
