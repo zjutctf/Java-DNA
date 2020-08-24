@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ctf_java_net">
+    <output-path>$PROJECT_DIR$/out/artifacts/</output-path>
+    <root id="archive" name="ctf_java_net.war">
+      <element id="artifact" artifact-name="ctf_java_net:e" />
+    </root>
+  </artifact>
+</component>
