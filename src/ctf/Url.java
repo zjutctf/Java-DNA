@@ -14,6 +14,7 @@ public class Url extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String url = req.getParameter("url");
         if (url.contains("evil.ca")) {
+            resp.getWriter().write("host is not allowed");
             return;
         }
         URL url1 = new URL(IDN.toASCII(url));
@@ -22,6 +23,9 @@ public class Url extends HttpServlet {
             String[] path = url.split("/");
             String file = new String(Base64.getDecoder().decode(path[path.length - 1]));
             resp.getWriter().write(new String(Files.readAllBytes(Paths.get(file))));
+        }else{
+            resp.getWriter().write("host is not allowed");
+            return;
         }
     }
 

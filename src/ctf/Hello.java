@@ -21,6 +21,10 @@ public class Hello extends HttpServlet {
             resp.getWriter().write("'flag' is not allowed");
             return;
         }
+        if (file.contains("passwd")) {
+            resp.getWriter().write("'passwd' is not allowed");
+            return;
+        }
         String path = this.getServletContext().getRealPath(file.split("\\?")[0]);
         OutputStream os = resp.getOutputStream();
         os.write(Files.readAllBytes(Paths.get(path)));
