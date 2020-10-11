@@ -1,0 +1,10 @@
+version: "3"
+services:
+  tomcat:
+    build: .
+    image: stinger/javadna
+    ports:
+      - "80:80"
+      - "22:22"
+    environment:
+      - FLAG=flag{whh}
